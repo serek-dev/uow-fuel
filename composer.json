@@ -1,0 +1,41 @@
+{
+  "name": "stwarog/uow-fuel",
+  "description": "Unit of Work feature for Fuel's PHP ORM.",
+  "type": "library",
+  "require": {
+    "fuel/core": "^1.8",
+    "php": ">=7.1",
+    "fuel/orm": "^1.8",
+    "stwarog/uow": "dev-master"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Stwarog\\UowFuel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      {
+        "Tests\\": "tests/"
+      }
+    ]
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Twarog",
+      "email": "contact@stwarog.com"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "vendor/{$name}/": [
+        "type:fuel-package"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}
