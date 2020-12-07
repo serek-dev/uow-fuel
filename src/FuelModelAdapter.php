@@ -222,7 +222,7 @@ class FuelModelAdapter implements EntityInterface
         return new AutoIncrementIdStrategy();
     }
 
-    public function originalClass(): object
+    public function originalClass()
     {
         return $this->model;
     }
