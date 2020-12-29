@@ -6,7 +6,7 @@
     "php": ">=7.1",
     "fuel/core": "^1.8",
     "fuel/orm": "^1.8",
-    "stwarog/uow": "dev-master"
+    "stwarog/uow": "^1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "^5.1",
@@ -38,5 +38,5 @@
       ]
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }
