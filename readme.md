@@ -111,3 +111,8 @@ Nothing yet.
 
 #### License
 MIT
+
+### Change Log
+
+##### 1.1.2 (2021-01-03)
+* *a0bf93b7* used array_diff_assoc instead of array_diff due no columns were checked
