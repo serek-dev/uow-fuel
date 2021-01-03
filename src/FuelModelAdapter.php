@@ -67,7 +67,7 @@ class FuelModelAdapter implements EntityInterface
         $data     = _get($this->model, '_data');
         $original = _get($this->model, '_original');
 
-        return array_diff($data, $original);
+        return array_diff_assoc($data, $original);
     }
 
     public function table(): string
