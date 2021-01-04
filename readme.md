@@ -114,5 +114,8 @@ MIT
 
 ### Change Log
 
+##### 1.1.3 (2021-01-04)
+* *398d1247* used the most recent version of uow core
+
 ##### 1.1.2 (2021-01-03)
 * *a0bf93b7* used array_diff_assoc instead of array_diff due no columns were checked
