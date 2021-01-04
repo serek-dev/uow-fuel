@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d55b26f2fe2d6f1a793923183d97b07d",
+    "content-hash": "6d25d5852e57f42b1543a23b44b76e7e",
     "packages": [
         {
             "name": "composer/installers",
@@ -708,16 +708,16 @@
         },
         {
             "name": "stwarog/uow",
-            "version": "1.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stwarog/uow.git",
-                "reference": "ea54d00b30e1923cfd974dfd66257cdc0ffb052e"
+                "reference": "cf130cfaa867e58a7701222c49c9f498203d57ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stwarog/uow/zipball/ea54d00b30e1923cfd974dfd66257cdc0ffb052e",
-                "reference": "ea54d00b30e1923cfd974dfd66257cdc0ffb052e",
+                "url": "https://api.github.com/repos/stwarog/uow/zipball/cf130cfaa867e58a7701222c49c9f498203d57ac",
+                "reference": "cf130cfaa867e58a7701222c49c9f498203d57ac",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +749,7 @@
                 }
             ],
             "description": "Generic Unit of Work pattern implementation for Active Records ORM's. Allows to split technical implementation from domain logic.",
-            "time": "2020-12-29T21:29:03+00:00"
+            "time": "2021-01-04T13:37:50+00:00"
         }
     ],
     "packages-dev": [
@@ -2467,7 +2467,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "stwarog/uow": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
