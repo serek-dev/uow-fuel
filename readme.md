@@ -6,8 +6,6 @@
 This package is an extension for [UOW Core](https://github.com/stwarog/uow) for Fuel PHP Framework.
 At this moment it supports ORM models (with relations).
 
-**Note it's still under tests, don't use on production yet!**
-
 #### Zero configuration installation
 
 ```bash 
@@ -105,9 +103,6 @@ query should looks like.
 
 #### Contribution
 Please take a look at core [contribution guide](https://github.com/stwarog/uow#contribution).
-
-#### Changelog
-Nothing yet.
 
 #### License
 MIT
