@@ -2,3 +2,4 @@
 /vendor/
 /fuel
 *.cache
+phpstan/tmp

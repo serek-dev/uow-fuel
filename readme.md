@@ -112,6 +112,7 @@ MIT
 ##### 1.2.0 (2021-06-21) 
 * upgraded core package to 1.2.0
 * added ./tests to .gitignore
+* installed & configured PHPCS, PHPSTAN
 
 ##### 1.1.3 (2021-01-04)
 * *398d1247* used the most recent version of uow core

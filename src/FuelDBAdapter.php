@@ -1,29 +1,8 @@
-<?php declare(strict_types=1);
-/*
-    Copyright (c) 2020 Sebastian Twaróg <contact@stwarog.com>
+<?php
 
-    Permission is hereby granted, free of charge, to any person obtaining
-    a copy of this software and associated documentation files (the
-    "Software"), to deal in the Software without restriction, including
-    without limitation the rights to use, copy, modify, merge, publish,
-    distribute, sublicense, and/or sell copies of the Software, and to
-    permit persons to whom the Software is furnished to do so, subject to
-    the following conditions:
-
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+declare(strict_types=1);
 
 namespace Stwarog\UowFuel;
-
 
 use Fuel\Core\Database_Query_Builder_Delete;
 use Fuel\Core\Database_Query_Builder_Update;
@@ -71,11 +50,11 @@ class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
         $this->query($statement->compile());
     }
 
-    public function query(string $sql)
+    public function query(string $sql): void
     {
         parent::log($sql);
 
-        return $this->db::query($sql)->execute();
+        $this->db::query($sql)->execute();
     }
 
     public function update(string $tableName, array $where, array $columns, array $values): void
@@ -104,7 +83,7 @@ class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
         }
 
         /** @var Database_Result $result */
-        $result = $this->db::select($this->db::expr('MAX('.$idKey.') as count'))->from($table)->execute();
+        $result = $this->db::select($this->db::expr('MAX(' . $idKey . ') as count'))->from($table)->execute();
         parent::log($this->db::last_query());
 
         $this->cachedTableIds[$table][$idKey] = (int) $result->get('count') + 1;

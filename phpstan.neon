@@ -1,0 +1,7 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    tmpDir: phpstan/tmp
+    level: max
+    paths:
+        - src
+        - tests
