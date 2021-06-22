@@ -109,6 +109,10 @@ MIT
 
 ### Change Log
 
+##### 1.3.0 (2021-06-23)
+* Upgraded core package to 1.3.0
+* Reduced phpstan errors to 2
+
 ##### 1.2.0 (2021-06-21) 
 * upgraded core package to 1.2.0
 * added ./tests to .gitignore

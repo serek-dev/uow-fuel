@@ -45,7 +45,7 @@ final class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInter
     /**
      * @param string $tableName
      * @param array<int, string> $columns
-     * @param array<int< mixed> $values
+     * @param array<int, mixed> $values
      */
     public function insert(string $tableName, array $columns, array $values): void
     {
@@ -62,6 +62,7 @@ final class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInter
         $this->db::query($sql)->execute();
     }
 
+    /** @inheritdoc */
     public function update(string $tableName, array $where, array $columns, array $values): void
     {
         /** @var Database_Query_Builder_Update|Database_Query_Builder_Where $statement */
@@ -71,6 +72,7 @@ final class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInter
         $this->query($statement->compile());
     }
 
+    /** @inheritdoc */
     public function delete(string $tableName, array $where): void
     {
         /** @var Database_Query_Builder_Delete|Database_Query_Builder_Where $statement */

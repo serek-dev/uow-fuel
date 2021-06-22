@@ -23,7 +23,7 @@ final class FuelModelAdapter implements EntityInterface
 {
     /** @var Model */
     private $model;
-    /** @var RelationBag<RelationInterface> */
+    /** @var RelationBag<RelationInterface> $relations */
     private $relations;
     /** @var string */
     private $objectHash;
@@ -37,7 +37,7 @@ final class FuelModelAdapter implements EntityInterface
         $this->model = $model;
         $this->objectHash = spl_object_hash($model);
         $assoc = array_keys($this->model->get_pk_assoc());
-        $this->idKey = array_values($assoc)[0];
+        $this->idKey = !empty($assoc) ? (string)array_values($assoc)[0] : '';
     }
 
     public function isDirty(): bool
@@ -151,7 +151,7 @@ final class FuelModelAdapter implements EntityInterface
                                 return new FuelModelAdapter($model);
                             },
                             $mergedData[$field]
-                        ): null;
+                        ) : null;
 
                         $relation = new HasMany($meta['key_from'], $meta['model_to'], $meta['key_to']);
 
