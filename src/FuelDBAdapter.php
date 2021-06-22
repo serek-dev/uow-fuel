@@ -12,7 +12,7 @@ use Fuel\Core\DB;
 use Stwarog\Uow\DBConnectionInterface;
 use Stwarog\Uow\Shared\AbstractDBAdapter;
 
-class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
+final class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
 {
     /** @var DB */
     private $db;
@@ -42,6 +42,11 @@ class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
         parent::commitTransaction();
     }
 
+    /**
+     * @param string $tableName
+     * @param array<int, string> $columns
+     * @param array<int< mixed> $values
+     */
     public function insert(string $tableName, array $columns, array $values): void
     {
         $statement = $this->db::insert($tableName);

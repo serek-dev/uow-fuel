@@ -18,7 +18,7 @@ use Stwarog\Uow\Relations\HasMany;
 use Stwarog\Uow\Relations\HasOne;
 use Stwarog\Uow\Relations\ManyToMany;
 
-class FuelModelAdapter implements EntityInterface
+final class FuelModelAdapter implements EntityInterface
 {
     /** @var Model */
     private $model;

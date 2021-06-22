@@ -12,7 +12,7 @@ use MyCLabs\Enum\Enum;
  * @method static FuelRelationType HAS_MANY()
  * @method static FuelRelationType MANY_TO_MANY()
  */
-class FuelRelationType extends Enum
+final class FuelRelationType extends Enum
 {
     public const HAS_ONE = '_has_one';
     public const BELONGS_TO = '_belongs_to';

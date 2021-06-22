@@ -11,15 +11,15 @@ use Stwarog\Uow\EntityManager;
 use Stwarog\Uow\EntityManagerInterface;
 use Stwarog\Uow\UnitOfWork\UnitOfWork;
 
-class FuelEntityManager extends EntityManager implements EntityManagerInterface
+final class FuelEntityManager extends EntityManager implements EntityManagerInterface
 {
     /**
      * Initializes new instance (Forge in Fuel's nomenclature).
      *
-     * @param DB    $db
-     * @param array $config
+     * @param DB                    $db
+     * @param array<string, string> $config
      *
-     * @return static
+     * @return self
      */
     public static function forge(DB $db, array $config = []): self
     {
