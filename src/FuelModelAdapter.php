@@ -34,10 +34,10 @@ final class FuelModelAdapter implements EntityInterface
 
     public function __construct(Model $model)
     {
-        $this->model      = $model;
+        $this->model = $model;
         $this->objectHash = spl_object_hash($model);
-        $assoc            = array_keys($this->model->get_pk_assoc());
-        $this->idKey      = array_values($assoc)[0];
+        $assoc = array_keys($this->model->get_pk_assoc());
+        $this->idKey = array_values($assoc)[0];
     }
 
     public function isDirty(): bool
@@ -50,7 +50,7 @@ final class FuelModelAdapter implements EntityInterface
      */
     private function getDifferences(): array
     {
-        $data     = _get($this->model, '_data');
+        $data = _get($this->model, '_data');
         $original = _get($this->model, '_original');
 
         return array_diff_assoc($data, $original);
@@ -61,7 +61,7 @@ final class FuelModelAdapter implements EntityInterface
         return _get($this->model, '_table_name');
     }
 
-    /** @inheritdoc  */
+    /** @inheritdoc */
     public function columns(): array
     {
         if ($this->isNew()) {
@@ -78,7 +78,7 @@ final class FuelModelAdapter implements EntityInterface
         return $this->model->is_new();
     }
 
-    /** @inheritdoc  */
+    /** @inheritdoc */
     public function values(): array
     {
         if ($this->isNew()) {
@@ -92,7 +92,7 @@ final class FuelModelAdapter implements EntityInterface
 
     public function idValue(): ?string
     {
-        return (string) $this->model[$this->idKey()] ?? null;
+        return (string)$this->model[$this->idKey()] ?? null;
     }
 
     public function idKey(): ?string
@@ -100,7 +100,7 @@ final class FuelModelAdapter implements EntityInterface
         return $this->idKey;
     }
 
-    /** @inheritdoc  */
+    /** @inheritdoc */
     public function relations(): RelationBag
     {
         $this->extractRelationsIfNotExists();
@@ -116,7 +116,7 @@ final class FuelModelAdapter implements EntityInterface
         $this->relations = new RelationBag();
 
         $dataRelations = _get($this->model, '_data_relations');
-        $customData    = _get($this->model, '_custom_data');
+        $customData = _get($this->model, '_custom_data');
 
         $mergedData = array_merge($dataRelations, $customData);
 
@@ -130,17 +130,19 @@ final class FuelModelAdapter implements EntityInterface
             foreach ($relation as $field => $meta) {
                 switch ($relationTypePropName) {
                     case FuelRelationType::BELONGS_TO:
-                        $entity = !empty($mergedData[$field]) ? new FuelModelAdapter($mergedData[$field]) : [];
-                        $bag    = new BelongsTo($meta['key_from'], $meta['model_to'], $meta['key_to']);
-                        $bag->setRelatedData([$entity]);
-                        $this->relations->add($field, $bag);
+                        $relation = new BelongsTo($meta['key_from'], $meta['model_to'], $meta['key_to']);
+                        if (!empty($mergedData[$field])) {
+                            $relation->setRelatedData([new FuelModelAdapter($mergedData[$field])]);
+                        }
+                        $this->relations->add($field, $relation);
                         break;
 
                     case FuelRelationType::HAS_ONE:
-                        $entity = !empty($mergedData[$field]) ? new FuelModelAdapter($mergedData[$field]) : [];
-                        $bag    = new HasOne($meta['key_from'], $meta['model_to'], $meta['key_to']);
-                        $bag->setRelatedData([$entity]);
-                        $this->relations->add($field, $bag);
+                        $relation = new HasOne($meta['key_from'], $meta['model_to'], $meta['key_to']);
+                        if (!empty($mergedData[$field])) {
+                            $relation->setRelatedData([new FuelModelAdapter($mergedData[$field])]);
+                        }
+                        $this->relations->add($field, $relation);
                         break;
 
                     case FuelRelationType::HAS_MANY:
@@ -149,12 +151,16 @@ final class FuelModelAdapter implements EntityInterface
                                 return new FuelModelAdapter($model);
                             },
                             $mergedData[$field]
-                        ) : [];
+                        ): null;
 
-                        $entities = array_values($entities); # normalization, due fuels maps indexes as PK
-                        $bag      = new HasMany($meta['key_from'], $meta['model_to'], $meta['key_to']);
-                        $bag->setRelatedData($entities);
-                        $this->relations->add($field, $bag);
+                        $relation = new HasMany($meta['key_from'], $meta['model_to'], $meta['key_to']);
+
+                        if (!empty($entities)) {
+                            $entities = array_values($entities); # normalization, due fuels maps indexes as PK
+                            $relation->setRelatedData($entities);
+                        }
+
+                        $this->relations->add($field, $relation);
                         break;
 
                     case FuelRelationType::MANY_TO_MANY:
@@ -163,18 +169,22 @@ final class FuelModelAdapter implements EntityInterface
                                 return new FuelModelAdapter($model);
                             },
                             $mergedData[$field]
-                        ) : [];
+                        ) : null;
 
-                        $entities = array_values($entities); # normalization, due fuels maps indexes as PK
-                        $bag      = new ManyToMany(
+                        $relation = new ManyToMany(
                             $meta['key_from'],
                             $meta['key_through_from'],
                             $meta['table_through'],
                             $meta['key_through_to'],
                             $meta['key_to']
                         );
-                        $bag->setRelatedData($entities);
-                        $this->relations->add($field, $bag);
+
+                        if (!empty($entities)) {
+                            $entities = array_values($entities); # normalization, due fuels maps indexes as PK
+                            $relation->setRelatedData($entities);
+                        }
+
+                        $this->relations->add($field, $relation);
                         break;
 
                     default:
