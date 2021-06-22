@@ -17,15 +17,19 @@ use Stwarog\Uow\Relations\BelongsTo;
 use Stwarog\Uow\Relations\HasMany;
 use Stwarog\Uow\Relations\HasOne;
 use Stwarog\Uow\Relations\ManyToMany;
+use Stwarog\Uow\Relations\RelationInterface;
 
 final class FuelModelAdapter implements EntityInterface
 {
     /** @var Model */
     private $model;
-    /** @var RelationBag */
+    /** @var RelationBag<RelationInterface> */
     private $relations;
+    /** @var string */
     private $objectHash;
+    /** @var string */
     private $idKey = '';
+    /** @var array<Closure> */
     private $closures = [];
 
     public function __construct(Model $model)
@@ -33,7 +37,7 @@ final class FuelModelAdapter implements EntityInterface
         $this->model      = $model;
         $this->objectHash = spl_object_hash($model);
         $assoc            = array_keys($this->model->get_pk_assoc());
-        $this->idKey      = reset($assoc);
+        $this->idKey      = array_values($assoc)[0];
     }
 
     public function isDirty(): bool
@@ -41,6 +45,9 @@ final class FuelModelAdapter implements EntityInterface
         return false === empty($this->getDifferences());
     }
 
+    /**
+     * @return array<int, string>
+     */
     private function getDifferences(): array
     {
         $data     = _get($this->model, '_data');
@@ -54,6 +61,7 @@ final class FuelModelAdapter implements EntityInterface
         return _get($this->model, '_table_name');
     }
 
+    /** @inheritdoc  */
     public function columns(): array
     {
         if ($this->isNew()) {
@@ -70,6 +78,7 @@ final class FuelModelAdapter implements EntityInterface
         return $this->model->is_new();
     }
 
+    /** @inheritdoc  */
     public function values(): array
     {
         if ($this->isNew()) {
@@ -91,6 +100,7 @@ final class FuelModelAdapter implements EntityInterface
         return $this->idKey;
     }
 
+    /** @inheritdoc  */
     public function relations(): RelationBag
     {
         $this->extractRelationsIfNotExists();
@@ -161,7 +171,6 @@ final class FuelModelAdapter implements EntityInterface
                             $meta['key_through_from'],
                             $meta['table_through'],
                             $meta['key_through_to'],
-                            $meta['model_to'],
                             $meta['key_to']
                         );
                         $bag->setRelatedData($entities);
@@ -198,11 +207,13 @@ final class FuelModelAdapter implements EntityInterface
         return new AutoIncrementIdStrategy();
     }
 
+    /** @inheritdoc */
     public function originalClass()
     {
         return $this->model;
     }
 
+    /** @inheritdoc */
     public function get(string $field)
     {
         return $this->model[$field];
@@ -218,6 +229,7 @@ final class FuelModelAdapter implements EntityInterface
         return empty($this->toArray());
     }
 
+    /** @inheritdoc */
     public function toArray(): array
     {
         return $this->model->to_array();
@@ -233,6 +245,7 @@ final class FuelModelAdapter implements EntityInterface
         $this->closures[] = $closure;
     }
 
+    /** @inheritdoc */
     public function getPostPersistClosures(): array
     {
         return $this->closures;
