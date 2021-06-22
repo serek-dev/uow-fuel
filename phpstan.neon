@@ -1,7 +1,15 @@
 parameters:
     checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
     tmpDir: phpstan/tmp
     level: max
+    bootstrapFiles:
+        - mock/Mock.php
     paths:
         - src
         - tests
+    scanDirectories:
+         # Phpstan will be aware of this classes but won't "check" them, we need to do this manualy because fuel's autoloader is not working as expected
+         # Some locations are also not included by loader like WP
+         - vendor/core
+#         - vendor/orm
