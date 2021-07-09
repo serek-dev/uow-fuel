@@ -752,16 +752,16 @@
         },
         {
             "name": "stwarog/uow",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stwarog/uow.git",
-                "reference": "4de89ad2d822bd15a79a3ff327fa23dc8530ad80"
+                "reference": "c52ac3376520cda460cafa320b950606cf301e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stwarog/uow/zipball/4de89ad2d822bd15a79a3ff327fa23dc8530ad80",
-                "reference": "4de89ad2d822bd15a79a3ff327fa23dc8530ad80",
+                "url": "https://api.github.com/repos/stwarog/uow/zipball/c52ac3376520cda460cafa320b950606cf301e83",
+                "reference": "c52ac3376520cda460cafa320b950606cf301e83",
                 "shasum": ""
             },
             "require": {
@@ -796,7 +796,7 @@
                 }
             ],
             "description": "Generic Unit of Work pattern implementation for Active Records ORM's. Allows to split technical implementation from domain logic.",
-            "time": "2021-06-22T21:55:56+00:00"
+            "time": "2021-07-09T23:27:29+00:00"
         }
     ],
     "packages-dev": [
