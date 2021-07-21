@@ -10,9 +10,12 @@ if (!class_exists('Orm\Model')) {
     {
         private $_data;
 
+        private $_is_new;
+
         public function __construct($data = [], $new = true, $view = null, $cache = true)
         {
             $this->_data = $data;
+            $this->_is_new = $new;
         }
 
         public function current()
@@ -92,7 +95,7 @@ if (!class_exists('Orm\Model')) {
 
         public function is_new()
         {
-            return true;
+            return $this->_is_new;
         }
     }
 }

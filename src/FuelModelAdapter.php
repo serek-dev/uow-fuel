@@ -7,6 +7,8 @@ namespace Stwarog\UowFuel;
 use Closure;
 use InvalidArgumentException;
 use Orm\Model;
+use ReflectionClass;
+use ReflectionProperty;
 use Stwarog\Uow\DBConnectionInterface;
 use Stwarog\Uow\EntityInterface;
 use Stwarog\Uow\IdGenerators\AutoIncrementIdStrategy;
@@ -18,6 +20,7 @@ use Stwarog\Uow\Relations\HasMany;
 use Stwarog\Uow\Relations\HasOne;
 use Stwarog\Uow\Relations\ManyToMany;
 use Stwarog\Uow\Relations\RelationInterface;
+use Stwarog\Uow\Utils\ReflectionHelper;
 
 final class FuelModelAdapter implements EntityInterface
 {
@@ -259,5 +262,14 @@ final class FuelModelAdapter implements EntityInterface
     public function getPostPersistClosures(): array
     {
         return $this->closures;
+    }
+
+    public function noLongerNew(): void
+    {
+        $reflection = new ReflectionClass($this->model);
+        $property = $reflection->getProperty('_is_new');
+        $property->setAccessible(true);
+        $property->setValue($this->model, false);
+        $property->setAccessible(false);
     }
 }
