@@ -109,6 +109,11 @@ MIT
 
 ### Change Log
 
+##### 1.4.0 (2021-07-21)
+* Upgraded core package to 1.4.0
+* Implemented no longer new in FuelModelAdapter.php
+* Unit tests configuration + pseudo Mock of Fuel`s ORM
+
 ##### 1.3.1 (2021-07-10)
 * Upgraded core package to 1.3.1
 

@@ -8,7 +8,6 @@ use Closure;
 use InvalidArgumentException;
 use Orm\Model;
 use ReflectionClass;
-use ReflectionProperty;
 use Stwarog\Uow\DBConnectionInterface;
 use Stwarog\Uow\EntityInterface;
 use Stwarog\Uow\IdGenerators\AutoIncrementIdStrategy;
@@ -20,7 +19,6 @@ use Stwarog\Uow\Relations\HasMany;
 use Stwarog\Uow\Relations\HasOne;
 use Stwarog\Uow\Relations\ManyToMany;
 use Stwarog\Uow\Relations\RelationInterface;
-use Stwarog\Uow\Utils\ReflectionHelper;
 
 final class FuelModelAdapter implements EntityInterface
 {
