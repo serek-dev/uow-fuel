@@ -12,3 +12,5 @@ parameters:
          # Phpstan will be aware of this classes but won't "check" them, we need to do this manualy because fuel's autoloader is not working as expected
          # Some locations are also not included by loader like WP
          - vendor/core
+    excludePaths:
+        - src/FuelDBAdapter.php # todo fix fuel`s autoload

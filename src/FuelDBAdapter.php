@@ -14,10 +14,9 @@ use Stwarog\Uow\Shared\AbstractDBAdapter;
 
 final class FuelDBAdapter extends AbstractDBAdapter implements DBConnectionInterface
 {
-    /** @var DB */
-    private $db;
+    private DB $db;
 
-    private $cachedTableIds = [];
+    private array $cachedTableIds = [];
 
     public function __construct(DB $db)
     {

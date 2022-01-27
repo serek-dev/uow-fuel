@@ -22,16 +22,13 @@ use Stwarog\Uow\Relations\RelationInterface;
 
 final class FuelModelAdapter implements EntityInterface
 {
-    /** @var Model */
-    private $model;
+    private Model $model;
     /** @var RelationBag<RelationInterface> $relations */
-    private $relations;
-    /** @var string */
-    private $objectHash;
-    /** @var string */
-    private $idKey = '';
+    private RelationBag $relations;
+    private string $objectHash;
+    private string $idKey = '';
     /** @var array<Closure> */
-    private $closures = [];
+    private array $closures = [];
 
     public function __construct(Model $model)
     {
@@ -219,18 +216,18 @@ final class FuelModelAdapter implements EntityInterface
     }
 
     /** @inheritdoc */
-    public function originalClass()
+    public function originalClass(): object
     {
         return $this->model;
     }
 
     /** @inheritdoc */
-    public function get(string $field)
+    public function get(string $field): mixed
     {
         return $this->model[$field];
     }
 
-    public function set(string $field, $value): void
+    public function set(string $field, mixed $value): void
     {
         $this->model[$field] = $value;
     }

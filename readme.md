@@ -109,6 +109,9 @@ MIT
 
 ### Change Log
 
+##### 2.0.0 (2021-01-27)
+* Upgrade to PHP 8.0 + uow upgrade to v2.0
+
 ##### 1.4.0 (2021-07-21)
 * Upgraded core package to 1.4.0
 * Implemented no longer new in FuelModelAdapter.php

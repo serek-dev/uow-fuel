@@ -3,10 +3,10 @@
   "description": "Unit of Work feature for Fuel's PHP ORM.",
   "type": "library",
   "require": {
-    "php": ">=7.1",
+    "php": ">=8.0.0",
     "fuel/core": "^1.8 | dev-1.9/develop",
     "fuel/orm": "^1.8 | dev-1.9/develop",
-    "stwarog/uow": "^1.4.0"
+    "stwarog/uow": "^2.0.0"
   },
   "require-dev": {
     "symfony/var-dumper": "^5.1",
